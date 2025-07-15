@@ -1,0 +1,38 @@
+services:
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: temporal-dotnet-worker-prod
+    environment:
+      - Temporal__Endpoint=${TEMPORAL_ENDPOINT:-temporal:7233}
+      - Temporal__Namespace=${TEMPORAL_NAMESPACE:-default}
+      - Temporal__TaskQueue=${TEMPORAL_TASK_QUEUE:-sample-task-queue}
+      - DOTNET_ENVIRONMENT=Production
+      - Logging__LogLevel__Default=${LOG_LEVEL:-Information}
+      - Logging__LogLevel__Microsoft=Warning
+      - Logging__LogLevel__Temporalio=${TEMPORAL_LOG_LEVEL:-Information}
+      - Logging__LogLevel__CSWorker=${WORKER_LOG_LEVEL:-Information}
+    restart: unless-stopped
+    networks:
+      - temporal-network
+    # Health check for production monitoring
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "CSWorker"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    # Resource limits for production
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
+        reservations:
+          memory: 256M
+          cpus: "0.5"
+
+networks:
+  temporal-network:
+    external: true

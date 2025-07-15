@@ -1,0 +1,74 @@
+services:
+  temporal:
+    image: temporalio/auto-setup:latest
+    container_name: temporal-server-dev
+    depends_on:
+      - postgresql
+    environment:
+      - DB=postgres12
+      - DB_PORT=5432
+      - POSTGRES_USER=temporal
+      - POSTGRES_PWD=temporal
+      - POSTGRES_SEEDS=postgresql
+      - ENABLE_ES=false
+    ports:
+      - "7233:7233"
+    networks:
+      - temporal-network
+
+  temporal-ui:
+    image: temporalio/ui:latest
+    container_name: temporal-ui-dev
+    depends_on:
+      - temporal
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+      - TEMPORAL_CORS_ORIGINS=http://localhost:3000
+    ports:
+      - "8080:8080"
+    networks:
+      - temporal-network
+
+  postgresql:
+    image: postgres:15-alpine
+    container_name: temporal-postgresql-dev
+    environment:
+      POSTGRES_USER: temporal
+      POSTGRES_PASSWORD: temporal
+      POSTGRES_DB: temporal
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data-dev:/var/lib/postgresql/data
+    networks:
+      - temporal-network
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: temporal-dotnet-worker-dev
+    depends_on:
+      - temporal
+    environment:
+      - Temporal__Endpoint=temporal:7233
+      - Temporal__Namespace=default
+      - Temporal__TaskQueue=sample-task-queue
+      - DOTNET_ENVIRONMENT=Development
+      - Logging__LogLevel__Default=Debug
+      - Logging__LogLevel__Microsoft=Information
+      - Logging__LogLevel__Temporalio=Debug
+      - Logging__LogLevel__CSWorker=Debug
+    restart: unless-stopped
+    networks:
+      - temporal-network
+    volumes:
+      - ./src/appsettings.json:/app/appsettings.json:ro
+      - ./src/appsettings.Development.json:/app/appsettings.Development.json:ro
+
+volumes:
+  postgres-data-dev:
+
+networks:
+  temporal-network:
+    driver: bridge
