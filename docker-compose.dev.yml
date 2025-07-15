@@ -58,7 +58,7 @@ services:
       - Logging__LogLevel__Default=Debug
       - Logging__LogLevel__Microsoft=Information
       - Logging__LogLevel__Temporalio=Debug
-      - Logging__LogLevel__CSWorker=Debug
+      - Logging__LogLevel__NIWorker=Debug
     restart: unless-stopped
     networks:
       - temporal-network

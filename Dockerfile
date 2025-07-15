@@ -28,7 +28,7 @@ USER workeruser
 
 # Health check (optional)
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD pgrep -f TemporalWorker || exit 1
+    CMD pgrep -f NIWorker || exit 1
 
 # Set environment variables (can be overridden)
 ENV DOTNET_ENVIRONMENT=Production
@@ -37,4 +37,4 @@ ENV Temporal__Namespace=default
 ENV Temporal__TaskQueue=sample-task-queue
 
 # Run the worker
-ENTRYPOINT ["dotnet", "CSWorker.dll"]
+ENTRYPOINT ["dotnet", "NIWorker.dll"]

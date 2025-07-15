@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\CSWorker.csproj" />
+    <ProjectReference Include="..\src\NIWorker.csproj" />
   </ItemGroup>
 
 </Project>

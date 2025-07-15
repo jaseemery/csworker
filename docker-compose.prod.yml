@@ -12,13 +12,13 @@ services:
       - Logging__LogLevel__Default=${LOG_LEVEL:-Information}
       - Logging__LogLevel__Microsoft=Warning
       - Logging__LogLevel__Temporalio=${TEMPORAL_LOG_LEVEL:-Information}
-      - Logging__LogLevel__CSWorker=${WORKER_LOG_LEVEL:-Information}
+      - Logging__LogLevel__NIWorker=${WORKER_LOG_LEVEL:-Information}
     restart: unless-stopped
     networks:
       - temporal-network
     # Health check for production monitoring
     healthcheck:
-      test: ["CMD", "pgrep", "-f", "CSWorker"]
+      test: ["CMD", "pgrep", "-f", "NIWorker"]
       interval: 30s
       timeout: 10s
       retries: 3

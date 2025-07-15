@@ -23,7 +23,7 @@ A production-ready template for building Temporal workers using .NET 9 and Docke
 NIWorker/
 ├── src/
 │   ├── Program.cs                      # Worker entry point
-│   ├── CSWorker.csproj                 # Project file
+│   ├── NIWorker.csproj                 # Project file
 │   ├── appsettings.json                # Configuration
 │   ├── appsettings.Development.json
 │   ├── Workflows/
@@ -31,7 +31,7 @@ NIWorker/
 │   └── Activities/
 │       └── SampleActivities.cs         # Sample activities
 ├── tests/
-│   ├── CSWorker.Tests.csproj           # Test project
+│   ├── NIWorker.Tests.csproj           # Test project
 │   └── SampleWorkflowTests.cs          # Unit tests
 ├── Dockerfile                          # Multi-stage Docker build
 ├── docker-compose.yml                  # Default (development) setup

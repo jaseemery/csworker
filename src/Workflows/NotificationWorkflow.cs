@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Logging;
 using Temporalio.Workflows;
-using CSWorker.Activities;
+using NIWorker.Activities;
 
-namespace CSWorker.Workflows;
+namespace NIWorker.Workflows;
 
 [Workflow]
 public class NotificationWorkflow

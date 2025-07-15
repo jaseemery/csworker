@@ -3,11 +3,11 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Temporalio.Testing;
 using Temporalio.Worker;
-using CSWorker.Activities;
-using CSWorker.Workflows;
+using NIWorker.Activities;
+using NIWorker.Workflows;
 using Xunit;
 
-namespace CSWorker.Tests;
+namespace NIWorker.Tests;
 
 public class SampleWorkflowTests
 {

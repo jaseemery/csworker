@@ -3,8 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Temporalio.Extensions.Hosting;
-using CSWorker.Activities;
-using CSWorker.Workflows;
+using NIWorker.Activities;
+using NIWorker.Workflows;
 
 var builder = Host.CreateApplicationBuilder(args);
 

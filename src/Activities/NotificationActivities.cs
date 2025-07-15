@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Logging;
 using Temporalio.Activities;
 
-namespace CSWorker.Activities;
+namespace NIWorker.Activities;
 
 public class NotificationActivities
 {
