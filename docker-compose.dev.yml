@@ -47,7 +47,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: temporal-dotnet-worker-dev
+    container_name: niworker-dev
     depends_on:
       - temporal
     environment:

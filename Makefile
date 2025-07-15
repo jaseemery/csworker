@@ -32,12 +32,12 @@ test:
 	cd tests && dotnet test
 
 docker-build:
-	docker build -t temporal-dotnet-worker .
+	docker build -t niworker .
 
 docker-run:
 	docker run --rm -it \
 		-e Temporal__Endpoint=host.docker.internal:7233 \
-		temporal-dotnet-worker
+		niworker
 
 # Development commands
 dev-up:

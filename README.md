@@ -1,4 +1,4 @@
-# Temporal .NET Worker Template
+# NIWorker
 
 A production-ready template for building Temporal workers using .NET 9 and Docker.
 
@@ -20,7 +20,7 @@ A production-ready template for building Temporal workers using .NET 9 and Docke
 ## Project Structure
 
 ```
-temporal-dotnet-worker-template/
+NIWorker/
 ├── src/
 │   ├── Program.cs                      # Worker entry point
 │   ├── CSWorker.csproj                 # Project file
@@ -207,15 +207,15 @@ make clean         # Clean build artifacts and containers
 ### Docker Swarm
 
 ```bash
-docker stack deploy -c docker-compose.prod.yml temporal-worker-stack
+docker stack deploy -c docker-compose.prod.yml niworker-stack
 ```
 
 ### Kubernetes
 
 ```bash
 # Build and push image
-docker build -t your-registry/temporal-worker:latest .
-docker push your-registry/temporal-worker:latest
+docker build -t your-registry/niworker:latest .
+docker push your-registry/niworker:latest
 
 # Deploy (requires kubernetes manifests)
 kubectl apply -f k8s/

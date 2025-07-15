@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: temporal-dotnet-worker-prod
+    container_name: niworker-prod
     environment:
       - Temporal__Endpoint=${TEMPORAL_ENDPOINT:-temporal:7233}
       - Temporal__Namespace=${TEMPORAL_NAMESPACE:-default}
