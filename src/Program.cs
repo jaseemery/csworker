@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Temporalio.Extensions.Hosting;
+using ApiRequestor.Extensions;
 using NIWorker.Activities;
 using NIWorker.Workflows;
 
@@ -18,6 +19,9 @@ var taskQueue = builder.Configuration["Temporal:TaskQueue"] ?? "sample-task-queu
 
 builder.Services.AddLogging();
 
+// Add ApiRequestor services
+builder.Services.AddApiRequestor("api-config.json");
+
 // Add Temporal worker with dependency injection
 builder.Services
     .AddHostedTemporalWorker(
@@ -26,8 +30,10 @@ builder.Services
         taskQueue)
     .AddScopedActivities<SampleActivities>()
     .AddScopedActivities<NotificationActivities>()
+    .AddScopedActivities<ApiActivities>()
     .AddWorkflow<SampleWorkflow>()
     .AddWorkflow<NotificationWorkflow>()
+    .AddWorkflow<UserManagementWorkflow>()
     .ConfigureOptions(options =>
     {
         // Configure worker options
