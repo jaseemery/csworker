@@ -1,0 +1,42 @@
+{
+  "BaseUrl": "https://jsonplaceholder.typicode.com",
+  "DefaultHeaders": {
+    "User-Agent": "NIWorker/1.0",
+    "Accept": "application/json"
+  },
+  "TimeoutSeconds": 30,
+  "Endpoints": [
+    {
+      "Name": "GetUser",
+      "Method": "GET",
+      "Path": "/users/{userId}",
+      "Headers": {},
+      "QueryParameters": {},
+      "ContentType": "application/json"
+    },
+    {
+      "Name": "CreatePost",
+      "Method": "POST",
+      "Path": "/posts",
+      "Headers": {},
+      "QueryParameters": {},
+      "Body": {
+        "title": "",
+        "body": "",
+        "userId": 0
+      },
+      "ContentType": "application/json"
+    },
+    {
+      "Name": "GetPosts",
+      "Method": "GET",
+      "Path": "/posts",
+      "Headers": {},
+      "QueryParameters": {
+        "userId": ""
+      },
+      "ContentType": "application/json"
+    }
+  ],
+  "Authentication": null
+}
